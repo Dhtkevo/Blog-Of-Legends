@@ -4,10 +4,23 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const userRouter = require('./routes/userRouter');
+const commentRouter = require('./routes/commentRouter');
+const postRouter = require('./routes/postRouter');
 
 const app = express();
+
+const mongoose = require("mongoose");
+
+require('dotenv').config();
+
+mongoose.set("strictQuery", false);
+
+
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(process.env.MONGODB);
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,8 +32,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/posts', postRouter);
+app.use('/comments', commentRouter);
+app.use('/users', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
