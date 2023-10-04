@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 
 const User = require('../models/User');
@@ -12,7 +13,6 @@ let jwt = require('jsonwebtoken');
 router.get('/', async (req, res, next) => {
     let allUsers = await User.find();
     res.json(allUsers);
-
 });
 
 router.get('/:id', async (req, res) => {
@@ -24,7 +24,6 @@ router.get('/:id', async (req, res) => {
         console.log(error);
         res.json({ message: error.message });
     }
-
 });
 
 // Register
