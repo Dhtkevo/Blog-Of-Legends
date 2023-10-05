@@ -59,7 +59,7 @@ router.post("/register", async (req, res) => {
 
         user.token = token;
 
-        res.status(201).json(user);
+        res.redirect('http://localhost:5173/');
     } catch (err) {
         res.json({ messsage: err.message });
     }
