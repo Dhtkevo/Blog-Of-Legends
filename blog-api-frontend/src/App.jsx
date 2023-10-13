@@ -1,12 +1,25 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Blog from "./components/Blog";
+import { useState } from "react";
+import { createContext } from "react";
+import { useEffect } from "react";
+
+export const UserContext = createContext(null);
+export const UpdateContext = createContext(null);
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    let storedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(storedUser);
+  }, []);
+
   return (
-    <div className="flex flex-col h-full">
-      <Navbar />
-      <Outlet />
-    </div>
+    <UpdateContext.Provider value={setUser}>
+      <UserContext.Provider value={user}>
+        <Blog />
+      </UserContext.Provider>
+    </UpdateContext.Provider>
   );
 }
 

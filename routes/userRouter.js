@@ -59,7 +59,7 @@ router.post("/register", async (req, res) => {
 
         user.token = token;
 
-        res.redirect('http://localhost:5173/');
+        res.status(201).json(user);
     } catch (err) {
         res.json({ messsage: err.message });
     }
@@ -94,7 +94,7 @@ router.post("/login", async (req, res) => {
             user.token = token;
 
             // user
-            res.status(200).json(user);
+            res.status(201).json(user);
         }
         res.status(400).send("Invalid Credentials");
     } catch (err) {

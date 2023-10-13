@@ -3,6 +3,7 @@ import App from "../../App";
 import HomePage from "../HomePage";
 import PostPage from "../PostPage/PostPage";
 import Register from "../Register";
+import SignIn from "../SignIn";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,12 @@ const router = createBrowserRouter([
         element: <PostPage />,
       },
       {
-        path: "/sign-up",
+        path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/sign-in",
+        element: <SignIn />,
       },
     ],
   },

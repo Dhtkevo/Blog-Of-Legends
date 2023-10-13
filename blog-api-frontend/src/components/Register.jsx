@@ -6,6 +6,7 @@ function Register() {
       className="rounded-3xl shadow-md self-center mt-8 bg-gray-200 w-1/2 h-1/2 flex flex-col justify-center items-center gap-8"
     >
       <div className="flex flex-col gap-4">
+        <h1 className="text-4xl font-bold text-center">Register</h1>
         <div className="flex flex-col">
           <label for="username">Username:</label>
           <input
@@ -28,7 +29,7 @@ function Register() {
         </div>
       </div>
       <button className="bg-white px-4 py-2 rounded-lg hover:shadow-md hover:cursor-pointer">
-        Sign Up{" "}
+        Sign Up
       </button>
     </form>
   );
