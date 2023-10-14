@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "../App";
 
 function PostCard({ title, createdAt, id }) {
-  const [userName, setUserName] = useState("Anonymous");
+  const [userName, setUserName] = useState("Test User");
+
+  const user = useContext(UserContext);
 
   useEffect(() => {
     axios
@@ -22,7 +25,11 @@ function PostCard({ title, createdAt, id }) {
   return (
     <div className="h-80 w-80 rounded-2xl shadow-lg flex flex-col items-center justify-center gap-24">
       <div className="flex flex-col gap-2 items-center">
-        <h2 className="text-4xl font-bold">{userName}</h2>
+        {!user ? (
+          <h2 className="text-4xl font-bold">Anonymous</h2>
+        ) : (
+          <h2 className="text-4xl font-bold">{userName}</h2>
+        )}
         <h6 className="text-xl font-medium">{title}</h6>
       </div>
       <div className="flex flex-col gap-4 items-center">

@@ -9,6 +9,12 @@ function CreatePost() {
   const user = useContext(UserContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, []);
+
   const handleTitleChange = (event) => {
     setTitleField(event.target.value);
   };
