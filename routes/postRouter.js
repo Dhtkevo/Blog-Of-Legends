@@ -11,7 +11,6 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:id', async (req, res) => {
-  //Get specific post from database
   try {
     let post = await Post.findById(req.params.id).populate('user_id').exec();
     res.json(post);
@@ -23,8 +22,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/new', async (req, res) => {
-  // Get required information from form
-  // Create new post to databse with info
   try {
     await Post.create({ title: req.body.title, text: req.body.text, published: req.body.published, user_id: req.body.user_id });
     res.redirect('/posts');

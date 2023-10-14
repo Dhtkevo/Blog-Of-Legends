@@ -1,10 +1,13 @@
 import CommentCard from "./CommentCard";
 import { Link, useMatch } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../App";
 
 function PostPage() {
   const [currentPost, setCurrentPost] = useState([]);
   const [comments, setComments] = useState([]);
+
+  const user = useContext(UserContext);
 
   const match = useMatch("/posts/:postid");
 
@@ -26,14 +29,18 @@ function PostPage() {
     <div className="h-full flex flex-col p-12 items-center gap-8">
       <div className="flex flex-col gap-6">
         <h1 className="text-6xl font-bold text-center">{currentPost.title}</h1>
-        <p className="text-lg shadow-sm bg-gray-100">{currentPost.text} </p>
+        <p className="text-lg shadow-sm bg-gray-100 rounded-lg p-2">
+          {currentPost.text}{" "}
+        </p>
       </div>
-      <Link
-        to={`/posts/${postid}/new`}
-        className=" text-center font-medium text-lg p-4 w-1/6 self-center rounded-xl bg-gray-200 shadow-sm hover:bg-fuchsia-300 hover:shadow-lg"
-      >
-        <button>Leave Comment</button>
-      </Link>
+      {user && (
+        <Link
+          to={`/posts/${postid}/new`}
+          className=" text-center font-medium text-lg p-4 w-1/6 self-center rounded-xl bg-gray-200 shadow-sm hover:bg-fuchsia-300 hover:shadow-lg"
+        >
+          <button>Leave Comment</button>
+        </Link>
+      )}
       <h5 className="font-semibold underline">Comments </h5>
       <div className="h-full w-full flex flex-col items-center gap-2">
         {comments.map(

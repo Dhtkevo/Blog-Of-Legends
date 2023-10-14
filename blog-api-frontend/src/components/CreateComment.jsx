@@ -17,7 +17,6 @@ function CreateComment() {
       .then(function (response) {
         const post = response.data;
         setPost(post);
-        console.log(post);
       })
       .catch(function (error) {
         console.log(error);
@@ -39,7 +38,6 @@ function CreateComment() {
       })
       .then((response) => {
         const comment = response.data;
-        console.log(comment);
         navigate("/");
       })
       .catch((error) => {
@@ -60,12 +58,12 @@ function CreateComment() {
               Create New Comment
             </h1>
             <div className="flex flex-col">
-              <label for="text">Text:</label>
+              <label htmlFor="text">Text:</label>
               <textarea
                 className="resize-none"
                 name="text"
                 id="text"
-                minlength="4"
+                minLength="4"
                 onChange={handleTextChange}
                 rows="5"
                 cols="33"

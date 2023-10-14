@@ -68,20 +68,15 @@ router.post("/register", async (req, res) => {
 
 // Login
 router.post("/login", async (req, res) => {
-    // Our login logic starts here
     try {
-        // Get user input
         const { username, password } = req.body;
 
-        // Validate user input
         if (!(username && password)) {
             res.status(400).send("All input is required");
         }
-        // Validate if user exist in our database
         const user = await User.findOne({ username });
 
         if (user && (await bcrypt.compare(password, user.password))) {
-            // Create token
             const token = jwt.sign(
                 { user_id: user._id, username },
                 process.env.TOKEN_KEY,
@@ -90,22 +85,17 @@ router.post("/login", async (req, res) => {
                 }
             );
 
-            // save user token
             user.token = token;
 
-            // user
             res.status(201).json(user);
         }
         res.status(400).send("Invalid Credentials");
     } catch (err) {
         console.log(err);
     }
-    // Our register logic ends here
 });
 
 router.post('/new', async (req, res) => {
-    // Get required information from form
-    // Create new user to databse with info
     try {
         await User.create({ username: req.body.username, password: req.body.password });
         res.redirect('/');

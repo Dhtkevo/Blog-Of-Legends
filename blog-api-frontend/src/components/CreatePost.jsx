@@ -34,7 +34,6 @@ function CreatePost() {
       })
       .then((response) => {
         const post = response.data;
-        console.log(post);
         navigate("/");
       })
       .catch((error) => {
@@ -51,23 +50,23 @@ function CreatePost() {
       <div className="flex flex-col gap-4">
         <h1 className="text-4xl font-bold text-center">Create New Post</h1>
         <div className="flex flex-col">
-          <label for="title">Title:</label>
+          <label htmlFor="title">Title:</label>
           <input
             name="title"
             id="title"
             type="text"
-            minlength="4"
+            minLength="4"
             onChange={handleTitleChange}
             required
           ></input>
         </div>
         <div className="flex flex-col">
-          <label for="text">Text:</label>
+          <label htmlFor="text">Text:</label>
           <textarea
             className="resize-none"
             name="text"
             id="text"
-            minlength="4"
+            minLength="4"
             onChange={handleTextChange}
             rows="5"
             cols="33"

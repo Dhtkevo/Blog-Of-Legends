@@ -28,13 +28,9 @@ function SignIn() {
       })
       .then((response) => {
         const user = response.data;
-        console.log(user);
-        // localStorage.setItem("jwt", users.auth_token);
         localStorage.setItem("user", JSON.stringify(user));
-        // console.log("users", users); // undefined
         if (user) {
           setUser(user);
-          console.log("SET USER RAN");
           navigate("/");
         }
       })
@@ -53,23 +49,23 @@ function SignIn() {
         <div className="flex flex-col gap-4">
           <h1 className="text-4xl font-bold text-center">Log In</h1>
           <div className="flex flex-col">
-            <label for="username">Username:</label>
+            <label htmlFor="username">Username:</label>
             <input
               name="username"
               id="username"
               type="text"
-              minlength="8"
+              minLength="8"
               onChange={handleUsernameChange}
               required
             ></input>
           </div>
           <div className="flex flex-col">
-            <label for="password">Password:</label>
+            <label htmlFor="password">Password:</label>
             <input
               name="password"
               id="password"
-              type="text"
-              minlength="8"
+              type="password"
+              minLength="8"
               onChange={handlePasswordChange}
               required
             ></input>

@@ -44,23 +44,23 @@ function Register() {
       <div className="flex flex-col gap-4">
         <h1 className="text-4xl font-bold text-center">Register</h1>
         <div className="flex flex-col">
-          <label for="username">Username:</label>
+          <label htmlFor="username">Username:</label>
           <input
             name="username"
             id="username"
             type="text"
-            minlength="8"
+            minLength="8"
             onChange={handleUsernameChange}
             required
           ></input>
         </div>
         <div className="flex flex-col">
-          <label for="password">Password (Min 8 characters):</label>
+          <label htmlFor="password">Password (Min 8 characters):</label>
           <input
             name="password"
             id="password"
-            type="text"
-            minlength="8"
+            type="password"
+            minLength="8"
             onChange={handlePasswordChange}
             required
           ></input>
