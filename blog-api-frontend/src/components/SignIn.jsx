@@ -1,12 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
-import {
-  redirect,
-  redirectDocument,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
-import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 import { UpdateContext } from "../App";
 
 function SignIn() {
