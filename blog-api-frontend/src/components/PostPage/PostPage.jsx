@@ -1,11 +1,10 @@
 import CommentCard from "./CommentCard";
-import { useMatch } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-
 function PostPage() {
-const [currentPost, setCurrentPost] = useState([]);
-const [comments, setComments] = useState([]);
+  const [currentPost, setCurrentPost] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const match = useMatch("/posts/:postid");
 
@@ -14,13 +13,13 @@ const [comments, setComments] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:3000/posts/${postid}`)
       .then((response) => response.json())
-      .then((post) => setCurrentPost(post))},
-       []);
+      .then((post) => setCurrentPost(post));
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`http://localhost:3000/comments`)
-    .then((response) => response.json())
-    .then((comments) => setComments(comments))
+      .then((response) => response.json())
+      .then((comments) => setComments(comments));
   }, []);
 
   return (
@@ -29,11 +28,24 @@ const [comments, setComments] = useState([]);
         <h1 className="text-6xl font-bold text-center">{currentPost.title}</h1>
         <p className="text-lg shadow-sm bg-gray-100">{currentPost.text} </p>
       </div>
+      <Link
+        to={`/posts/${postid}/new`}
+        className=" text-center font-medium text-lg p-4 w-1/6 self-center rounded-xl bg-gray-200 shadow-sm hover:bg-fuchsia-300 hover:shadow-lg"
+      >
+        <button>Leave Comment</button>
+      </Link>
       <h5 className="font-semibold underline">Comments </h5>
       <div className="h-full w-full flex flex-col items-center gap-2">
-        {
-          comments.map((comment)=> comment.post_id === postid && <CommentCard text={comment.text} key={comment._id} />)
-        }
+        {comments.map(
+          (comment) =>
+            comment.post_id === postid && (
+              <CommentCard
+                text={comment.text}
+                author_name={comment.author_name}
+                key={comment._id}
+              />
+            )
+        )}
       </div>
     </div>
   );

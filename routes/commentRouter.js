@@ -26,8 +26,8 @@ router.post('/new', async (req, res) => {
     // Get required information from form
     // Create new comment to database with info
     try {
-        await Comment.create({ author_name: req.body.author_name, text: req.body.text, post_id: req.body.post_id });
-        res.redirect('/');
+        const comment = await Comment.create({ author_name: req.body.author_name, text: req.body.text, post_id: req.body.post_id });
+        res.json(comment);
     } catch (error) {
         res.json({ message: error.message });
     }

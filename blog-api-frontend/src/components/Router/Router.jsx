@@ -5,6 +5,7 @@ import PostPage from "../PostPage/PostPage";
 import Register from "../Register";
 import SignIn from "../SignIn";
 import CreatePost from "../CreatePost";
+import CreateComment from "../CreateComment";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/posts/:id",
         element: <PostPage />,
+      },
+      {
+        path: "/posts/:id/new",
+        element: <CreateComment />,
       },
       {
         path: "/register",
