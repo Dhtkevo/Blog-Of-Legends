@@ -2,10 +2,13 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UpdateContext } from "../App";
+import ErrorBox from "./ErrorBox";
 
 function SignIn() {
   const [usernameField, setUsernameField] = useState("");
   const [passwordField, setPasswordField] = useState("");
+  const [validLogin, setValidLogin] = useState(true);
+
   const navigate = useNavigate();
 
   const setUser = useContext(UpdateContext);
@@ -31,13 +34,17 @@ function SignIn() {
         localStorage.setItem("user", JSON.stringify(user));
         if (user) {
           setUser(user);
+          setValidLogin(true);
           navigate("/");
         }
       })
       .catch((error) => {
+        setValidLogin(false);
         console.log(error);
       });
   }
+
+  let errorMessage = "Invalid Credentials";
 
   return (
     <>
@@ -47,6 +54,7 @@ function SignIn() {
         className="bg-navblack rounded-3xl shadow-md self-center mt-8 bg-gray-200 w-1/2 h-1/2 flex flex-col justify-center items-center gap-8"
       >
         <div className="flex flex-col gap-4">
+          {!validLogin && <ErrorBox message={errorMessage} />}
           <h1 className="text-lightishgreen text-4xl font-bold text-center">
             Log In
           </h1>

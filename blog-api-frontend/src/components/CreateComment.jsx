@@ -2,11 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../App";
 import { useNavigate, useParams } from "react-router-dom";
+import ErrorBox from "./ErrorBox";
 
 function CreateComment() {
   const [textField, setTextField] = useState("");
   const [post, setPost] = useState(null);
   let user = useContext(UserContext);
+  const [validComment, setValidComment] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("Invalid Comment");
+
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -30,6 +34,12 @@ function CreateComment() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (textField.length < 3) {
+      setValidComment(false);
+      setErrorMessage("Comment Length Must Be Atleast 3 Characters!");
+      return;
+    }
+
     axios
       .post("http://localhost:3000/comments/new", {
         author_name: user.username,
@@ -38,9 +48,11 @@ function CreateComment() {
       })
       .then((response) => {
         const comment = response.data;
+        setValidComment(true);
         navigate("/");
       })
       .catch((error) => {
+        setValidComment(false);
         console.log(error);
       });
   }
@@ -54,6 +66,7 @@ function CreateComment() {
           className="bg-navblack rounded-3xl shadow-md self-center mt-8 bg-gray-200 w-1/2 h-1/2 flex flex-col justify-center items-center gap-8"
         >
           <div className="flex flex-col gap-4">
+            {!validComment && <ErrorBox message={errorMessage} />}
             <h1 className="text-lightishgreen text-4xl font-bold text-center">
               Create New Comment
             </h1>

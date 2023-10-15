@@ -2,11 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import ErrorBox from "./ErrorBox";
 
 function CreatePost() {
   const [titleField, setTitleField] = useState("");
   const [textField, setTextField] = useState("");
   const user = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState("Error creating post");
+  const [validPost, setValidPost] = useState(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,6 +30,16 @@ function CreatePost() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (titleField.length < 5) {
+      setValidPost(false);
+      setErrorMessage("Title must be atleast 5 characters!");
+      return;
+    } else if (textField.length < 5) {
+      setValidPost(false);
+      setErrorMessage("Post must have atleast 5 chracters!");
+      return;
+    }
+
     axios
       .post("http://localhost:3000/posts/new", {
         title: titleField,
@@ -34,9 +48,11 @@ function CreatePost() {
       })
       .then((response) => {
         const post = response.data;
+        setValidPost(true);
         navigate("/");
       })
       .catch((error) => {
+        setValidPost(false);
         console.log(error);
       });
   }
@@ -45,9 +61,10 @@ function CreatePost() {
     <form
       action="http://localhost:3000/posts/new"
       method="POST"
-      className="rounded-3xl shadow-md self-center mt-8 bg-navblack w-1/2 h-1/2 flex flex-col justify-center items-center gap-8"
+      className="overflow-auto rounded-3xl shadow-md self-center mt-8 bg-navblack w-1/2 h-2/3 flex flex-col justify-center items-center gap-8"
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 py-10">
+        {!validPost && <ErrorBox message={errorMessage} />}
         <h1 className="text-lightishgreen text-4xl font-bold text-center">
           Create New Post
         </h1>

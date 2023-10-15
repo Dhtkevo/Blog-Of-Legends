@@ -1,10 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ErrorBox from "./ErrorBox";
 
 function Register() {
   const [usernameField, setUsernameField] = useState("");
   const [passwordField, setPasswordField] = useState("");
+  const [validRegister, setValidRegister] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("Error creating account");
+
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -15,8 +19,22 @@ function Register() {
     setPasswordField(event.target.value);
   };
 
+  function validateRegisterFields() {
+    if (usernameField.length < 4) {
+      setValidRegister(false);
+      setErrorMessage("Username must be atleast 4 characters!");
+      return;
+    } else if (passwordField.length < 8) {
+      setValidRegister(false);
+      setErrorMessage("Password must be atleast 8 characters!");
+      return;
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
+
+    validateRegisterFields();
 
     axios
       .post("http://localhost:3000/users/register", {
@@ -24,13 +42,11 @@ function Register() {
         password: passwordField,
       })
       .then((response) => {
-        const user = response.data;
-        localStorage.setItem("user", JSON.stringify(user));
-        if (user) {
-          navigate("/sign-in");
-        }
+        setValidRegister(true);
+        navigate("/sign-in");
       })
       .catch((error) => {
+        setValidRegister(false);
         console.log(error);
       });
   }
@@ -42,6 +58,7 @@ function Register() {
       className="bg-navblack rounded-3xl shadow-md self-center mt-8 bg-gray-200 w-1/2 h-1/2 flex flex-col justify-center items-center gap-8"
     >
       <div className="flex flex-col gap-4">
+        {!validRegister && <ErrorBox message={errorMessage} />}
         <h1 className="text-lightishgreen text-4xl font-bold text-center">
           Register
         </h1>
