@@ -1,7 +1,9 @@
 function ErrorBox({ message }) {
   return (
     <div className="border-2 border-lightishgreen p-4 bg-coalblack">
-      <h2 className="font-bold text-2xl text-textsilver">{message}</h2>
+      <h2 className="font-bold text-2xl text-center text-textsilver">
+        {message}
+      </h2>
     </div>
   );
 }

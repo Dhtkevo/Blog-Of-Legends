@@ -47,9 +47,10 @@ function CreatePost() {
         user_id: user._id,
       })
       .then((response) => {
-        const post = response.data;
+        const posts = response.data;
+        const newPost = posts[posts.length - 1];
         setValidPost(true);
-        navigate("/");
+        navigate(`/posts/${newPost._id}`);
       })
       .catch((error) => {
         setValidPost(false);

@@ -49,7 +49,7 @@ function CreateComment() {
       .then((response) => {
         const comment = response.data;
         setValidComment(true);
-        navigate("/");
+        navigate(`/posts/${id}`);
       })
       .catch((error) => {
         setValidComment(false);
