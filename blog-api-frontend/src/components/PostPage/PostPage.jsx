@@ -31,7 +31,7 @@ function PostPage() {
         <h1 className="text-6xl font-bold text-center text-lightishgreen">
           {currentPost.title}
         </h1>
-        <p className="text-xl shadow-sm bg-navblack rounded-lg p-2 text-textsilver">
+        <p className="border-2 border-navblack text-xl shadow-sm bg-navblack rounded-lg p-2 text-textsilver">
           {currentPost.text}{" "}
         </p>
       </div>
