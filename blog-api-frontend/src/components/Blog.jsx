@@ -7,7 +7,7 @@ function Blog() {
   const user = useContext(UserContext);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="bg-coalblack flex flex-col h-full min-h-fit">
       <Navbar user={user} />
       <Outlet user={user} />
     </div>

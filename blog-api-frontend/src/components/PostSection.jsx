@@ -11,7 +11,7 @@ function PostSection() {
   }, []);
 
   return (
-    <div className="bg-white flex-1 flex justify-center items-center lg:justify-start lg:px-8 lg:flex-wrap lg:gap-4">
+    <div className="overflow-auto py-10 bg-navblack flex-1 flex justify-center items-center lg:justify-start lg:px-8 lg:flex-wrap lg:gap-4">
       {posts.map((post) => {
         return (
           <PostCard

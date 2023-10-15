@@ -12,15 +12,19 @@ function Navbar({ user }) {
   }
 
   return (
-    <div className="bg-white shadow-md flex items-center justify-between">
-      <h2 className="font-medium text-3xl py-6 pl-8">
+    <div className="bg-navblack shadow-md flex items-center justify-between">
+      <h2 className="text-lightishgreen font-medium text-3xl py-6 pl-8">
         <span className="hover:cursor-pointer">
           <Link to="/">Blog Of Legends</Link>
         </span>
       </h2>
-      {user && <h2 className="font-bold text-3xl">Welcome {user.username}!</h2>}
+      {user && (
+        <h2 className="text-lightishgreen font-bold text-3xl">
+          Welcome {user.username}!
+        </h2>
+      )}
       {!user ? (
-        <div className="flex gap-4 pr-8 text-lg">
+        <div className="text-lightishgreen flex gap-4 pr-8 text-lg">
           <h4 className="hover:cursor-pointer hover:text-2xl">
             <Link to="/sign-in">Sign In</Link>
           </h4>
@@ -30,7 +34,7 @@ function Navbar({ user }) {
         </div>
       ) : (
         <h4
-          className="hover:cursor-pointer text-2xl pr-8"
+          className="text-lightishgreen hover:cursor-pointer text-2xl pr-8"
           onClick={handleLogOut}
         >
           <Link to="/sign-in">Log out</Link>

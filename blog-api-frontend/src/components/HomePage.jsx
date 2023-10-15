@@ -4,7 +4,7 @@ import PostSection from "./PostSection";
 function HomePage() {
   return (
     <>
-      <div className="flex flex-col gap-20">
+      <div className="flex flex-col ">
         <Banner />
         <PostSection />
       </div>
