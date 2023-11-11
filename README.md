@@ -32,6 +32,8 @@ To Visit App:
 
 `localhost:5173/`  
 
+Guest Login =>  Username: guestuser   Password: password
+
 ## Reflection
 
 This was a personal project I worked on for over a month. I built this project with the goal of practicing user authentication and authorization using JWT. I set out to build a full stack website where users can register and sign into accounts, create their own blog posts, and leave comments under other blog posts.
